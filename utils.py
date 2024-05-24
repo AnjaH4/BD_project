@@ -1,8 +1,9 @@
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
+import vaex
 
-def transform_parquet(file_path):
+def transform_parquet(file_path): #file_path = path to the csv file
     parquet_file = file_path.replace('.csv', '.parquet')
     chunksize = 100_000
 
@@ -20,3 +21,10 @@ def transform_parquet(file_path):
         parquet_writer.write_table(table)
 
     parquet_writer.close()
+
+
+# def transform_hdf5(file_path):
+#     vaex_df = vaex.from_csv(file_path, convert=True, chunk_size=5_000_000)
+#     # Save the vaex dataframe to a hdf5 file
+#     vaex_df.export_hdf5(file_path.replace('.csv', '.hdf5'))
+    
