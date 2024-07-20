@@ -1,4 +1,3 @@
-
 import requests
 from datetime import date
 import pandas as pd
