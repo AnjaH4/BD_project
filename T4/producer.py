@@ -16,8 +16,10 @@ def main():
         value_serializer=lambda v: json.dumps(v).encode('utf-8'))
     topic = 'tickets'
     
-    filepaths = glob('/home/anjah/Documents/mag/BD/project/BD_project/data/NYTickets/*.csv') #change this path
+    filepaths = glob('/home/anjah/Documents/mag/BD/project/BD_project/data/augmented/augmented/*.csv') #change this path
     print(len(filepaths))
+    #sort the filepaths
+    filepaths.sort()
     
     for file in filepaths:
         i = 0
@@ -30,10 +32,10 @@ def main():
                 #header = next(reader)
 
                 for row in reader:
-                    data = {header[i]: row[i] for i in range(len(header))}
+                    data = {header[j]: row[j] for j in range(len(header))}
                     Producer.send(topic, value=data)
                     print('sent to kafka', data)
-                    time.sleep(0.5)
+                    time.sleep(0.05)
 
                 Producer.flush()
     Producer.close()
