@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rolling Average Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.socket.io/5.11.3/socket.io.min.js"></script> <!-- Ensure this version matches server-side -->
+</head>
+<body>
+    <div id="plot" style="width: 100%; height: 500px;"></div>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        var data = {};
+
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+
+        socket.on('response', function(data) {
+            console.log('Server response:', data);
+        });
+
+        var testData = [
+        {
+            x: [1, 2, 3],
+            y: [10, 15, 13],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'Test Data'
+        }
+    ];
+
+        Plotly.newPlot('plot', testData);
+
+        socket.on('newdata', function(msg) {
+            console.log('New data received:', msg);
+            var day = msg.day_of_week;
+            var week = msg.week_of_year;
+            var mean = msg.mean_tickets;
+
+            if (!data[day]) {
+                data[day] = { x: [], y: [], type: 'scatter', name: day };
+            }
+
+            data[day].x.push(week);
+            data[day].y.push(mean);
+
+            var traces = Object.values(data);
+
+            Plotly.react('plot', traces);
+        });
+    </script>
+</body>
+</html>
