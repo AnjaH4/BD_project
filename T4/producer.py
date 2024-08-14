@@ -1,8 +1,3 @@
-import sys
-from random import choice
-from argparse import ArgumentParser, FileType
-from configparser import ConfigParser
-from confluent_kafka import Producer
 import json
 import time
 from kafka import KafkaProducer
@@ -35,7 +30,7 @@ def main():
                     data = {header[j]: row[j] for j in range(len(header))}
                     Producer.send(topic, value=data)
                     print('sent to kafka', data)
-                    time.sleep(0.05)
+                    time.sleep(0.005)
 
                 Producer.flush()
     Producer.close()
