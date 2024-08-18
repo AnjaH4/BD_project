@@ -54,10 +54,15 @@ column_mapping = {
     # Add other mappings if needed
 }
 
-files = ["2023", "2024_april"]  # "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022",
+files = ["2023_augmented", "2024_augmented", "2014_augmented", "2015_augmented", "2016_augmented", "2017_augmented", "2018_augmented", "2019_augmented", "2020_augmented", "2021_augmented", "2022_augmented"]
+#files = ["2014_augmented"]
 # files = ["Parking_Violations_Issued_-_Fiscal_Year_2024_20240524"]
-CSV_PATH = "/d/hpc/projects/FRI/bigdata/data/NYTickets"
-HDF5_PATH = "/d/hpc/projects/FRI/bigdata/students/mk75264/data/hdf5"
+CSV_PATH = "/d/hpc/projects/FRI/bigdata/students/mk75264/data/augmented"
+HDF5_PATH = "/d/hpc/projects/FRI/bigdata/students/mk75264/data/augmented/hdf5"
+
+#CSV_PATH = "/home/anjah/Documents/mag/BD/project/BD_project/data/augmented/augmented"
+#HDF5_PATH = "/home/anjah/Documents/mag/BD/project/BD_project/data/augmented/augmented"
+
 
 for file in files:
     # Load the dataset with specified dtypes and parse_dates
