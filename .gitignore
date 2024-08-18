@@ -3,4 +3,4 @@ data/
 .vscode/
 hdf5/
 .idea/
-__pycache__
+__pycache__/
