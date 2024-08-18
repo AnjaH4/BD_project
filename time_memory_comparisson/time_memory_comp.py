@@ -9,7 +9,7 @@ def main(args):
     cluster = LocalCluster(n_workers=10,  threads_per_worker=8, memory_limit="6GB")
     client = Client(cluster)
 
-    df = dd.read_parquet(os.path.join(args.path, "*.parquet")).sample(frac=1, random_state=42)
+    df = dd.read_parquet(os.path.join(args.path, "*.parquet")).sample(frac=0.1, random_state=42)
 
     #time to read the data
     start = datetime.now()
