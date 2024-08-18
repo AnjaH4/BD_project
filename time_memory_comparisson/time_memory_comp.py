@@ -6,7 +6,7 @@ from datetime import datetime
 import argparse
 
 def main(args):
-    cluster = LocalCluster(n_workers=3,  threads_per_worker=8, memory_limit="18GB")
+    cluster = LocalCluster(n_workers=1,  threads_per_worker=8, memory_limit="60GB")
     client = Client(cluster)
 
     df = dd.read_parquet(os.path.join(args.path, "*.parquet")).sample(frac=0.01, random_state=42)
