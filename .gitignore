@@ -1,3 +1,5 @@
 data/
 *.parquet
 .vscode/
+hdf5/
+.idea/
