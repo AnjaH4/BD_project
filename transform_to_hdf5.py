@@ -58,16 +58,17 @@ files = ["2023_augmented", "2024_augmented", "2014_augmented", "2015_augmented",
 #files = ["2014_augmented"]
 # files = ["Parking_Violations_Issued_-_Fiscal_Year_2024_20240524"]
 CSV_PATH = "/d/hpc/projects/FRI/bigdata/students/mk75264/data/augmented"
-HDF5_PATH = "/d/hpc/projects/FRI/bigdata/students/mk75264/data/augmented/hdf5"
+HDF5_PATH = "/d/hpc/projects/FRI/bigdata/students/mk75264/data/augmented/hdf5/not_compressed"
 
 #CSV_PATH = "/home/anjah/Documents/mag/BD/project/BD_project/data/augmented/augmented"
 #HDF5_PATH = "/home/anjah/Documents/mag/BD/project/BD_project/data/augmented/augmented"
 
 
 for file in files:
+    print(file)
     # Load the dataset with specified dtypes and parse_dates
     df = pd.read_csv(f"{CSV_PATH}/{file}.csv", dtype=dtypes, parse_dates=parse_dates)
-    print(file)
+    print(f"read file: {file}")
     # print(df.head())
 
     # Rename columns according to the mapping
@@ -81,6 +82,6 @@ for file in files:
                 df[col] = df[col].fillna('').astype(str)  # take care of nan values in object columns
 
     print("Converting to HDF5...")
-    df.to_hdf(f'{HDF5_PATH}/{file}.h5', key='df', mode='w', complevel=9, complib='blosc')  # , format="table")
+    df.to_hdf(f'{HDF5_PATH}/{file}.h5', key='df', mode='w', complevel=0, complib='blosc')  # , format="table")
 
     print("done")
